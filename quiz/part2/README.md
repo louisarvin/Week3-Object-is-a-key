@@ -23,7 +23,22 @@ misal faktronya angka 1 hanyalah
 Return 2
 */
 function digitPerkalianMinimum(angka) {
-  // you can only write your code here!
+    let minDigits = Infinity; // Untuk menyimpan jumlah digit minimum
+
+    for (let i = 1; i <= Math.sqrt(angka); i++) {
+        if (angka % i === 0) { // Jika i adalah faktor dari angka
+            const factor1 = i;
+            const factor2 = angka / i;
+
+            // Menghitung jumlah digit dari kedua faktor
+            const totalDigits = String(factor1).length + String(factor2).length;
+
+            // Perbarui minDigits jika totalDigits lebih kecil
+            minDigits = Math.min(minDigits, totalDigits);
+        }
+    }
+
+    return minDigits;
 }
 
 // TEST CASES
@@ -39,9 +54,21 @@ console.log(digitPerkalianMinimum(1)); // 2
 //DILARANG MENGGUNAKAN METHOD SORT, PELAJARI ALGORITMA SORTING YANG ADA DI GOOGLE
 //saran sih pake bubblesort walau tidak efisien tapi bagus buat belajar sorting
 function urutkanAbjad(str) {
-  // you can only write your code here!
-}
-
+    // you can only write your code here!
+    let arr = str.split('');
+    let temp;
+    for(let i = 0; i < arr.length; i++){
+      for(let j = i+1; j < arr.length; j++){
+        if(arr[i] > arr[j]){
+          temp = arr[i];
+          arr[i] = arr[j];
+          arr[j] = temp;
+        }
+      }
+    }
+    return arr.join('');
+  }
+  
 // TEST CASES
 console.log(urutkanAbjad('hello')); // 'ehllo'
 console.log(urutkanAbjad('truncate')); // 'acenrttu'
@@ -53,9 +80,19 @@ console.log(urutkanAbjad('aegis')); // 'aegis'
 ## Soal 3
 ```js
 //TIPS: gunakan method toUpperCase() dan toLowerCase()
+
 function tukarBesarKecil(kalimat) {
-  // you can only write your code here!
-}
+    // you can only write your code here!
+    let result = '';
+    for(let i = 0; i < kalimat.length; i++) {
+        if(kalimat[i] === kalimat[i].toUpperCase()) {
+            result += kalimat[i].toLowerCase();
+        } else {
+            result += kalimat[i].toUpperCase();
+        }
+    }
+    return result;
+  }
 
 // TEST CASES
 console.log(tukarBesarKecil('Hello World')); // "hELLO wORLD"
@@ -76,9 +113,27 @@ karena di bagian 'barian' terdapat b dipisah 3 karakter ari(totalnya 3) dan kete
 Spasi juga dianggap sebagai karakter
 */
 
-function checkAB(num) {
-  // you can only write your code here!
-}
+function checkAB(str) {
+    // Loop untuk memeriksa semua karakter di string
+    for (let i = 0; i < str.length; i++) {
+      // Jika menemukan 'a', periksa karakter pada jarak 3 ke depan dan belakang
+      if (str[i] === 'a') {
+        if (str[i + 4] === 'b' || str[i - 4] === 'b') {
+          return true;
+        }
+      }
+  
+      // Jika menemukan 'b', periksa karakter pada jarak 3 ke depan dan belakang
+      if (str[i] === 'b') {
+        if (str[i + 4] === 'a' || str[i - 4] === 'a') {
+          return true;
+        }
+      }
+    }
+  
+    // Jika tidak ditemukan pola yang sesuai
+    return false;
+  }
 
 // TEST CASES
 console.log(checkAB('lane borrowed')); // true
